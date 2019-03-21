@@ -26,35 +26,21 @@ document.querySelector('#create-note').addEventListener('click', function (e) {
 })
 
 // listen for input event
-document.querySelector('#search-text').addEventListener('input', function (e) {
+document.querySelector('#search-text').addEventListener('input', (e) => {
     filters.searchText = e.target.value
     renderNotes(notes, filters)
 })
 
-document.querySelector('#filter-by').addEventListener('change', function (e) {
+document.querySelector('#filter-by').addEventListener('change', (e) => {
     filters.sortBy = e.target.value
     renderNotes(notes, filters)
 })
 
 // syncing notes page with home storage
-window.addEventListener('storage', function (e) {
+window.addEventListener('storage', (e) => {
     if (e.key === 'notes') {
         notes = JSON.parse(e.newValue)
         renderNotes(notes, filters)
     }
 })
-
-// const now = moment()
-// now.subtract(1, 'week').subtract(20, 'days')
-// console.log(now.format('MMM Do, YYYY'))
-// console.log(now.fromNow())
-
-// const nowTimestamp = now.valueOf()
-
-// console.log(moment(nowTimestamp).toString())
-
-// const birthday = moment()
-// birthday.month(0).date(11).year(1995)
-
-// console.log(birthday.format('MMM Do, YYYY'))
 

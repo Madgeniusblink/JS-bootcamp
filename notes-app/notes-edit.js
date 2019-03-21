@@ -5,9 +5,7 @@ const backHome = document.querySelector('#back-home')
 const dateElement = document.querySelector('#last-edited')
 const noteId = location.hash.substring(1)
 let notes = getSavedNotes()
-let note = notes.find(function (note) {
-    return note.id === noteId
-})
+let note = notes.find((note) => note.id === noteId)
 
 
 if (note === undefined) {
@@ -22,7 +20,7 @@ dateElement.textContent = generateLastEdited(note.updatedAt)
 
 
 // input event for title
-titleElement.addEventListener('input', function (e) {
+titleElement.addEventListener('input', (e) => {
     note.title = e.target.value
     note.updatedAt = moment().valueOf()
     dateElement.textContent = generateLastEdited(note.updatedAt)
@@ -30,7 +28,7 @@ titleElement.addEventListener('input', function (e) {
 })
 
 // input event for title
-bodyElement.addEventListener('input', function (e) {
+bodyElement.addEventListener('input', (e) => {
     note.body = e.target.value
     note.updatedAt = moment().valueOf()
     dateElement.textContent = generateLastEdited(note.updatedAt)
@@ -38,7 +36,7 @@ bodyElement.addEventListener('input', function (e) {
 })
 
 // click event for remove note button
-removeElement.addEventListener('click', function () {
+removeElement.addEventListener('click', () => {
     removeNote(note.id)
     saveNotes(notes)
     location.assign('/index.html')
@@ -46,18 +44,16 @@ removeElement.addEventListener('click', function () {
 })
 
 // click event for back to home button
-backHome.addEventListener('click', function () {
+backHome.addEventListener('click', () => {
     location.assign('/index.html')
 })
 
 
 // Syncing across editing pages only on notes page
-window.addEventListener('storage', function (e) {
+window.addEventListener('storage', (e) => {
     if (e.key === 'notes') {
         notes = JSON.parse(e.newValue)
-        note = notes.find(function (note) {
-            return note.id === noteId
-        })
+        note = notes.find((note) => note.id === noteId)
         
         
         if (note === undefined) {
