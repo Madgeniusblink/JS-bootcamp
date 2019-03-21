@@ -1,45 +1,29 @@
-const notes = [{
-    title: 'My next trip',
-    body: 'I would like to go to spains'
-}, {
-    title: 'Python Mastery Book',
-    body: 'learn to use python to program everything'
+let notes = getSavedNotes()
 
-}, {
-    title: 'Web development With JavaScript',
-    body: 'learn to use javascript to handle any input of information easier'
-}]
-
-
-// Filter Object
 const filters = {
-    searchText: ''
+    searchText: '',
+    sortBy: 'byEdited'
 }
-
-// Start
-const renderNotes = function (notes, filters) {
-    const filterNotes = notes.filter(function (note) {
-        return note.title.toLowerCase().includes(filters.searchText.toLowerCase())
-    })
-
-    document.querySelector('#notes').innerHTML = ''
-
-    filterNotes.forEach(function (note) {
-        const noteEl = document.createElement('p')
-        noteEl.textContent = note.title
-        document.querySelector('#notes').appendChild(noteEl)
-    })
-}
-// End
 
 renderNotes(notes, filters)
 
+
 // listen for click event
 document.querySelector('#create-note').addEventListener('click', function (e) {
-    e.target.textContent = 'The button was clicked'
-    console.log(e)
-})
+    const id = uuidv4()
+    const timestamp = moment().valueOf()
 
+    notes.push({
+        id: id,
+        title: '',
+        body: '',
+        createdAt: timestamp,
+        updatedAt: timestamp
+    })
+    saveNotes(notes)
+    location.assign(`/edit-note.html#${id}`)
+    
+})
 
 // listen for input event
 document.querySelector('#search-text').addEventListener('input', function (e) {
@@ -48,5 +32,29 @@ document.querySelector('#search-text').addEventListener('input', function (e) {
 })
 
 document.querySelector('#filter-by').addEventListener('change', function (e) {
-    console.log(e.target.value)
+    filters.sortBy = e.target.value
+    renderNotes(notes, filters)
 })
+
+// syncing notes page with home storage
+window.addEventListener('storage', function (e) {
+    if (e.key === 'notes') {
+        notes = JSON.parse(e.newValue)
+        renderNotes(notes, filters)
+    }
+})
+
+// const now = moment()
+// now.subtract(1, 'week').subtract(20, 'days')
+// console.log(now.format('MMM Do, YYYY'))
+// console.log(now.fromNow())
+
+// const nowTimestamp = now.valueOf()
+
+// console.log(moment(nowTimestamp).toString())
+
+// const birthday = moment()
+// birthday.month(0).date(11).year(1995)
+
+// console.log(birthday.format('MMM Do, YYYY'))
+
