@@ -2,7 +2,11 @@
 // 15/20 you got a C(75%)
 
 
-const gradeCal = function(score, totalScore) {
+const gradeCal = (score, totalScore) => {
+    if (typeof score !== 'number' || typeof totalScore !== 'number') {
+        throw Error(' There is an issue here')
+    }
+
     const percent = (score / totalScore) * 100
     let letterGrade = ''
 
@@ -17,6 +21,7 @@ const gradeCal = function(score, totalScore) {
     } else {
         letterGrade = 'F'
     }
+
     return `You got a ${letterGrade} (${percent}%)`
 }
 
@@ -24,6 +29,9 @@ const gradeCal = function(score, totalScore) {
 
 // call function(student score,total possible score)
 
-const result = gradeCal(2, 20)
-
-console.log(result)
+try {
+    const result = gradeCal(15, 20)
+    console.log(result)
+} catch (error) {
+    console.log(error.message)
+}

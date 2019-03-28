@@ -1,3 +1,5 @@
+'use strict'
+
 let notes = getSavedNotes()
 
 const filters = {
@@ -43,4 +45,5 @@ window.addEventListener('storage', (e) => {
         renderNotes(notes, filters)
     }
 })
+
 

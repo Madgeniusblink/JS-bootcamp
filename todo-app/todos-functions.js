@@ -1,11 +1,11 @@
+'use strict'
 
 // Fetch existing todos from localStorage
 const getSavedTodos = () => {
     const todosJSON = localStorage.getItem('todos')
-
-    if (todosJSON !== null) {
-        return JSON.parse(todosJSON)
-    } else {
+    try {
+        return todosJSON ? JSON.parse(todosJSON) : []
+    } catch (error) {
         return []
     }
 }
@@ -15,6 +15,27 @@ const getSavedTodos = () => {
 const saveTodos = (todos) => {
     localStorage.setItem('todos', JSON.stringify(todos))
 }
+
+// remove Todo by ID
+const removeTodo = (id) => {
+    // find index
+    const todoIndex = todos.findIndex((todo) => todo.id === id)
+
+    // remove index
+    if (todoIndex > -1) {
+        todos.splice(todoIndex, 1)
+    }
+}
+
+// complete todo from False to True
+const toggleTodo = (id) => {
+    const todo = todos.find((todo) => todo.id === id)
+
+    if (todo) {
+        todo.completed = !todo.completed
+    }
+}
+// End
 
 // Render application todos based on filters
 const renderTodos = (todos, filters) => {
@@ -35,26 +56,6 @@ const renderTodos = (todos, filters) => {
     })
 }
 // End
-
-// remove Todo by ID
-const removeTodo = (id) => {
-    // find index
-    const todoIndex = todos.findIndex((todo) => todo.id === id)
-
-    // remove index
-    if (todoIndex > -1) {
-        todos.splice(todoIndex, 1)
-    }
-}
-
-// complete todo from False to True
-const toggleTodo = (id) => {
-    const todo = todos.find((todo) => todo.id === id)
-
-    if (todo !== undefined) {
-        todo.completed = !todo.completed
-    }
-}
 
 // Get the DOM elements for an individual todo
 const generateTodoDOM = (todo) => {
