@@ -4,41 +4,37 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Edit Note</title>
+        <title>Edit Note Core Feature</title>
         <!-- CSS -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="styles/styles.css">
+        <!-- favicon -->
+        <link rel="icon" href="images/favicon.png">
     </head>
     <body>
         <section>
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <div class="input-group mb-3 mt-5">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Note Title</span>
-                            </div>
-                            <input id="note-title" placeholder="The Title of Your Note" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-                            <span id="last-edited"></span>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlTextarea1">Enter note text</label>
-                            <textarea  class="form-control" id="note-body" placeholder="Describe your notes so you never forget..." rows="3"></textarea>
-                        </div>
-                        <div class="btn-group" role="group" aria-label="Basic example">
-                            <button id="remove-note" type="button" class="btn btn-primary">Remove note</button>
-                            <button type="button" class="btn btn-primary">Email note</button>
-                            <button type="button" class="btn btn-primary">Create a Reminder</button>
-                            <button id="back-home" type="button" class="btn btn-dark">Back to home</button>
-                        </div>
-                    </div>
+            <header class="header">
+                <div class="container">
+                    <h1 class="header__title">The Best Note App</h1>
+                    <h2 class="header__subtitle">Take notes and never forget</h2>
                 </div>
+            </header>
+            <div class="actions">
+                <div class="actions__container actions__container--spaced">
+                    <a id="back-home" href="index.html" class="">Home</a>
+                    <span id="last-edited"></span>
+                </div>
+            </div>
+            <div class="container">
+                <input id="note-title" class="title-input" placeholder="The Title of Your Note">
+                <textarea id="note-body" class="body-input" placeholder="Describe your notes so you never forget..."></textarea>
+                <button id="remove-note" class="button button--secondary">Remove note</button>
             </div>
         </section>
         <footer>
              <!-- JS -->
             <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"></script>
-            <script src="notes-functions.js"></script>
-            <script src="notes-edit.js"></script>
+            <script src="/scripts/notes-functions.js"></script>
+            <script src="/scripts/notes-edit.js"></script>
         </footer>
     </body>
 </html>

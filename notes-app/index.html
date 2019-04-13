@@ -4,39 +4,41 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Note App</title>
+        <title>Note Core Feature App</title>
         <!-- CSS -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="/styles/styles.css">
+        <link rel="icon" href="/images/favicon.png">
     </head>
-
     <body>
         <section>
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <h1>The Best Note App</h1>
-                        <h2>Take notes and never forget</h2>
-                        <input id="search-text" type="text" placeholder="Filter notes">
-                        <select id="filter-by">
-                            <option value="byEdited">Sort by last edited</option>
-                            <option value="byCreated">Sort by recently created</option>
-                            <option value="alphabetical">Sort alphabetically</option>
-                        </select>
-                        <div id="notes"></div>
-                        <div>
-                            <button style="margin-bottom: 10px;" type="button" class="btn btn-primary" id="create-note">Create Note</button>
-                        </div>
-                    </div>
+            <header class="header">
+                <div class="container">
+                    <h1 class="header__title">The Best Note App</h1>
+                    <h2 class="header__subtitle">Take notes and never forget</h2>
                 </div>
+            </header>
+            <div class="actions">
+                <div class="actions__container">
+                    <input id="search-text" type="text" class="input" placeholder="Filter notes">
+                    <select id="filter-by" class="dropdown">
+                        <option value="byEdited">Sort by last edited</option>
+                        <option value="byCreated">Sort by recently created</option>
+                        <option value="alphabetical">Sort alphabetically</option>
+                    </select>
+                </div>
+            </div>
+            <div class="container">
+                <div id="notes"></div>
+                <button id="create-note" class="button">Create Note</button>
             </div>
         </section>
     <!-- Footer -->
         <footer>
          <!-- JS -->
-        <script src="uuidv4.js"></script>
+        <script src="/scripts/uuidv4.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"></script>
-        <script src="notes-functions.js"></script>
-        <script src="note-app.js"></script>
+        <script src="/scripts/notes-functions.js"></script>
+        <script src="/scripts/note-app.js"></script>
         </footer>
     </body>
 </html>

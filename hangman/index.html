@@ -5,17 +5,22 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Hangman The Game</title>
+        
         <!-- CSS -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="/styles/styles.css">
+        <!-- Fav -->
+        <link rel="icon" href="/images/favicon.png">
     </head>
     <body>
         <section>
             <div class="container">
                 <div class="row">
                     <div class="col">
-                        <p id="puzzle"></p>
+                        <p id="puzzle" class="puzzle"></p>
                         <p id="guesses"></p>
-                        <input type="text">
+                        <div>
+                            <button id="reset" class="button">Reset</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -23,8 +28,8 @@
     </body>
     <footer>
         <!-- JS -->
-        <script src="request.js"></script>
-        <script src="hangman.js"></script>
-        <script src="app.js"></script>
+        <script src="/scripts/request.js"></script>
+        <script src="/scripts/hangman.js"></script>
+        <script src="/scripts/app.js"></script>
     </footer>
 </html>

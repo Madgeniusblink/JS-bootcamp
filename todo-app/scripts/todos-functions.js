@@ -39,6 +39,7 @@ const toggleTodo = (id) => {
 
 // Render application todos based on filters
 const renderTodos = (todos, filters) => {
+    const todoEl = document.querySelector('#todos')
     const filterTodos = todos.filter((todo) => {
         const searchTextMatch = todo.title.toLowerCase().includes(filters.searchText.toLowerCase())
         const hideCompletedMatch = !filters.hideCompleted || !todo.completed
@@ -48,18 +49,27 @@ const renderTodos = (todos, filters) => {
 
     const incomepleteTodos = filterTodos.filter((todo) => !todo.completed)
 
-    document.querySelector('#todos').innerHTML = ''
-    document.querySelector('#todos').appendChild(generateSummaryDOM(incomepleteTodos))
+    todoEl.innerHTML = ''
+    todoEl.appendChild(generateSummaryDOM(incomepleteTodos))
     
-    filterTodos.forEach((todo) => {
-        document.querySelector('#todos').appendChild(generateTodoDOM(todo))
-    })
+    if (filterTodos.length > 0) {
+        filterTodos.forEach((todo) => {
+            todoEl.appendChild(generateTodoDOM(todo))
+        })
+    } else {
+        const emptyMessage = document.createElement('p')
+        emptyMessage.classList.add('empty-message')
+        emptyMessage.textContent = 'No todos to show'
+        todoEl.appendChild(emptyMessage)
+    }
+
 }
 // End
 
 // Get the DOM elements for an individual todo
 const generateTodoDOM = (todo) => {
-    const todoEl = document.createElement('div')
+    const todoEl = document.createElement('label')
+    const containerEl = document.createElement('div')
     const checkbox = document.createElement('input')
     const todoText = document.createElement('span')
     const removeButton = document.createElement('button')
@@ -67,7 +77,7 @@ const generateTodoDOM = (todo) => {
     // setup todo checkbox
     checkbox.setAttribute('type', 'checkbox')
     checkbox.checked = todo.completed
-    todoEl.appendChild(checkbox)
+    containerEl.appendChild(checkbox)
     checkbox.addEventListener('change', () => {
         toggleTodo(todo.id)
         saveTodos(todos)
@@ -76,10 +86,16 @@ const generateTodoDOM = (todo) => {
 
     // setup the todo text
     todoText.textContent = todo.title
-    todoEl.appendChild(todoText)
+    containerEl.appendChild(todoText)
+
+    // setup container
+    todoEl.classList.add('list-item')
+    containerEl.classList.add('list-item__container')
+    todoEl.appendChild(containerEl)
 
     // setup button
-    removeButton.textContent = 'x'
+    removeButton.textContent = 'remove'
+    removeButton.classList.add('button', 'button--text')
     todoEl.appendChild(removeButton)
     removeButton.addEventListener('click', () => {
         removeTodo(todo.id)
@@ -94,7 +110,9 @@ const generateTodoDOM = (todo) => {
 
 // Get the DOM elements for list summary
 const generateSummaryDOM = (incomepleteTodos) => {
-    const summary = document.createElement('h3')
-    summary.textContent = `You have ${incomepleteTodos.length} todo's left for today.`
+    const summary = document.createElement('h2')
+    const plural = incomepleteTodos.length === 1 ? '' : 's'
+    summary.classList.add('list-title')
+    summary.textContent = `You have ${incomepleteTodos.length} todo${plural} left for today.`
     return summary
 }
