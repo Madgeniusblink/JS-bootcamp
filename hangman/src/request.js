@@ -38,3 +38,5 @@ const getLocation = async () => {
         throw new Error('Unable to fetch DATA from IP')
     }
 }
+
+export { getPuzzle as default }
